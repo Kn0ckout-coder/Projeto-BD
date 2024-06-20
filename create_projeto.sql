@@ -37,13 +37,13 @@ CREATE TABLE IF NOT EXISTS `Atleta` (
     FOREIGN KEY (`Atleta_idCapitao`)
     REFERENCES `Capitaes` (`idCapitao`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON UPDATE CASCADE,
     
   CONSTRAINT `fk_Atleta_Escola`
     FOREIGN KEY (`Atleta_idEscola`)
     REFERENCES `Escola` (`idEscola`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    ON UPDATE CASCADE);
 
 
 -- -----------------------------------------------------
@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `Combate` (
     FOREIGN KEY (`Combate_idEvento`)
     REFERENCES `Evento` (`idEvento`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    ON UPDATE CASCADE);
 
 
 -- -----------------------------------------------------
@@ -157,12 +157,12 @@ CREATE TABLE IF NOT EXISTS `Atleta_has_Combate` (
     FOREIGN KEY (`AC_idAtleta`)
     REFERENCES `Atleta` (`idAtleta`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_Atleta_has_Combate_Combate`
     FOREIGN KEY (`AC_idCombate`)
     REFERENCES `Combate` (`idCombate`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    ON UPDATE CASCADE);
 
 -- -----------------------------------------------------
 -- Table `Projeto`.`Juri_has_Evento`
@@ -176,12 +176,12 @@ CREATE TABLE IF NOT EXISTS `Juri_has_Evento` (
     FOREIGN KEY (`JC_idJuri`)
     REFERENCES `Juri` (`idJuri`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_Juri_has_Evento_Evento`
     FOREIGN KEY (`JC_idEvento`)
     REFERENCES `Evento` (`idEvento`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    ON UPDATE CASCADE);
 
 
 -- -----------------------------------------------------
@@ -196,9 +196,9 @@ CREATE TABLE IF NOT EXISTS `Modalidade_has_Escola` (
     FOREIGN KEY (`MA_idModalidade`)
     REFERENCES `Modalidade` (`idModalidade`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_Modalidade_has_Escola_Escola`
     FOREIGN KEY (`MA_idEscola`)
     REFERENCES `Escola` (`idEscola`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    ON UPDATE CASCADE);
