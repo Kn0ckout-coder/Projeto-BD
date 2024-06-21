@@ -84,8 +84,8 @@ BEGIN
         p_idade, 
         p_peso, 
         p_altura, 
-        IF(p_Atleta_idCapitao IS NULL, NULL, p_Atleta_idCapitao), 
-        IF(p_Atleta_idEscola IS NULL, NULL, p_Atleta_idEscola)
+        p_Atleta_idCapitao, 
+        p_Atleta_idEscola
     );
 END //
 
@@ -112,6 +112,7 @@ CALL InserirAtleta('Fábio Monteiro', 27, 74.6, 1.76, NULL, NULL);
 CALL InserirAtleta('António Marques', 23, 71.9, 1.83, 14, 7);
 CALL InserirAtleta('Eduardo Carvalho', 29, 76.3, 1.79, NULL, NULL);
 CALL InserirAtleta('Rodrigo Ramos', 20, 67.7, 1.84, 16, 8);
+
 
 INSERT INTO `Evento` (`nomeEvento`, `estado`) VALUES
 ('Campeonato Nacional', 'Ativo'),

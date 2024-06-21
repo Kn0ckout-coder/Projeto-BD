@@ -126,9 +126,9 @@ FROM
     Atleta a
 LEFT JOIN 
     Atleta_has_Combate ac ON a.idAtleta = ac.AC_idAtleta
-WHERE 
-    ac.AC_idAtleta IS NULL;
-    
+GROUP BY
+    a.idAtleta;
+
 
 -- 8
 -- Lista dos elementos de uma equipa com identificação do role de cada elemento na prova/evento e respetiva características de cada elemento;
@@ -164,7 +164,7 @@ FROM
     Mister m
     JOIN Escola e ON m.Mister_idEscola = e.idEscola
 
-UNION ALL -- Combinar os resultados das três consultas em uma única tabela de resultados.
+UNION ALL -- Combinar os resultados das três consultas numa única tabela de resultados.
 
 SELECT 
     'Atleta' AS Role,
@@ -204,6 +204,110 @@ ORDER BY
 LIMIT 5;
 
 -- 10
+-- Consulta adicional recorrendo a, pelo menos, 3 tabelas;
+
+SELECT 
+    e.nomeEvento AS NomeEvento,
+    c.nomeCombate AS NomeCombate,
+    j.nomeJuri AS NomeJuri,
+    c.data_combate AS DataCombate
+FROM 
+    Evento e
+JOIN 
+    Combate c ON e.idEvento = c.Combate_idEvento
+JOIN 
+    Juri j ON e.idEvento = j.idEvento
+WHERE 
+    e.estado = 'Ativo'
+ORDER BY 
+    e.nomeEvento, c.data_combate;
+    
+-- 11
+-- Consulta adicional recorrendo a, pelo menos, 3 tabelas que inclua WHERE e HAVING;
+
+SELECT
+    A.nome AS NomeAtleta,
+    COUNT(AC.AC_idCombate) AS TotalCombates,
+    SUM(E.numVitorias) AS TotalVitorias,
+    SUM(E.numDerrotas) AS TotalDerrotas
+FROM
+    Atleta A
+INNER JOIN
+    Atleta_has_Combate AC ON A.idAtleta = AC.AC_idAtleta
+INNER JOIN
+    Estatistica E ON A.idAtleta = E.Estatistica_idAtleta
+WHERE
+    E.numVitorias IS NOT NULL
+GROUP BY
+    A.idAtleta, A.nome
+HAVING
+    TotalCombates > 0
+ORDER BY
+    TotalCombates DESC;
+    
+-- 12
+-- Consulta adicional usando descrições de dados existentes num relacionamento recursivo;
+
+SELECT
+    A.nome AS NomeAtleta,
+    E.numVitorias AS TotalVitorias,
+    E.numDerrotas AS TotalDerrotas
+FROM
+    Atleta A
+INNER JOIN
+    Estatistica E ON A.idAtleta = E.Estatistica_idAtleta
+WHERE
+    E.numVitorias IS NOT NULL
+ORDER BY
+    A.nome;
+    
+    
+-- 13
+-- Duas consultas adicionais utilizando dois tipos diferentes de subqueries.
+
+-- Subquery Correlacionada -> uma ou mais colunas da consulta externa.
+
+SELECT
+    E.nome AS NomeEscola,
+    ROUND(AVG(A.altura),2) AS MediaAlturaAtletas
+FROM
+    Escola E
+INNER JOIN
+    Atleta A ON E.idEscola = A.Atleta_idEscola
+WHERE
+    EXISTS (
+        SELECT 1
+        FROM Estatistica Est
+        WHERE Est.Estatistica_idAtleta = A.idAtleta
+    )
+GROUP BY
+    E.nome;
+
+-- Subquery Escalar -> retorna um único valor e pode ser usada em qualquer lugar em que uma expressão escalar seja permitida dentro da consulta principal. 
+
+SELECT
+    E.nomeEvento AS NomeEvento,
+    (
+        SELECT COUNT(*)
+        FROM Combate C
+        WHERE C.Combate_idEvento = E.idEvento
+    ) AS NumCombates
+FROM
+    Evento E
+WHERE
+    EXISTS (
+        SELECT 1
+        FROM Combate C
+        WHERE C.Combate_idEvento = E.idEvento
+    );
+
+
+
+
+
+
+
+
 
 
 

@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `Atleta` (
   `altura` FLOAT NOT NULL,
   `Atleta_idCapitao` INT NULL,
   `Atleta_idEscola` INT NULL,
-  PRIMARY KEY (`idAtleta`, `Atleta_idCapitao`, `Atleta_idEscola`),
+  PRIMARY KEY (`idAtleta`),
   CONSTRAINT `fk_Atleta_Capitaes`
     FOREIGN KEY (`Atleta_idCapitao`)
     REFERENCES `Capitaes` (`idCapitao`),
@@ -42,7 +42,8 @@ CREATE TABLE IF NOT EXISTS `Atleta` (
     FOREIGN KEY (`Atleta_idEscola`)
     REFERENCES `Escola` (`idEscola`)
 );
-    
+
+describe atleta;
 
 
 -- -----------------------------------------------------
