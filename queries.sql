@@ -119,19 +119,94 @@ SELECT
     a.nome,
     a.idade,
     CASE
-        WHEN a.Atleta_idEscola IS NOT NULL THEN 'Federado'
+        WHEN a.Atleta_idEscola IS NOT NULL THEN 'Federado/Profissional'
         ELSE 'Casual'
     END AS tipoParticipante
 FROM 
     Atleta a
 LEFT JOIN 
     Atleta_has_Combate ac ON a.idAtleta = ac.AC_idAtleta
-LEFT JOIN 
-    Combate c ON ac.AC_idCombate = c.idCombate
-LEFT JOIN 
-    Evento e ON c.Combate_idEvento = e.idEvento
 WHERE 
-    e.idEvento IS NULL;
+    ac.AC_idAtleta IS NULL;
+    
+
+-- 8
+-- Lista dos elementos de uma equipa com identificação do role de cada elemento na prova/evento e respetiva características de cada elemento;
+
+SELECT 
+    'Capitão' AS Role,
+    c.nome AS Nome,
+    c.idade AS Idade,
+    e.nome AS Escola,
+    e.morada AS Morada,
+    est.numVitorias AS Vitórias,
+    est.numDerrotas AS Derrotas,
+    est.numCombates AS Total_Combates,
+    est.anosExperiencia AS Anos_Experiencia
+FROM 
+    Capitaes c
+    JOIN Estatistica est ON c.idCapitao = est.Estatistica_idCapitao
+    JOIN Escola e ON c.idCapitao = e.idEscola
+
+UNION ALL
+
+SELECT 
+    'Treinador' AS Role,
+    m.nome AS Nome,
+    m.idade AS Idade,
+    e.nome AS Escola,
+    e.morada AS Morada,
+    NULL AS Vitórias,
+    NULL AS Derrotas,
+    NULL AS Total_Combates,
+    NULL AS Anos_Experiencia
+FROM 
+    Mister m
+    JOIN Escola e ON m.Mister_idEscola = e.idEscola
+
+UNION ALL -- Combinar os resultados das três consultas em uma única tabela de resultados.
+
+SELECT 
+    'Atleta' AS Role,
+    a.nome AS Nome,
+    a.idade AS Idade,
+    e.nome AS Escola,
+    e.morada AS Morada,
+    est.numVitorias AS Vitórias,
+    est.numDerrotas AS Derrotas,
+    est.numCombates AS Total_Combates,
+    est.anosExperiencia AS Anos_Experiencia
+FROM 
+    Atleta a
+    JOIN Estatistica est ON a.idAtleta = est.Estatistica_idAtleta
+    JOIN Escola e ON a.Atleta_idEscola = e.idEscola;
+
+-- 9
+-- Top 5 das provas com maior número de participantes, agrupada por ano e tendo como base os últimos três anos bem como restrições relacionadas com 
+-- faixa etária e categoria dos participantes (e.g., federado, profissional, amador);
+
+SELECT
+    e.nomeEvento AS Evento,
+    YEAR(c.data_combate) AS Ano,
+    COUNT(DISTINCT ac.AC_idAtleta) AS Numero_Participantes
+FROM
+    Evento e
+    JOIN Combate c ON e.idEvento = c.Combate_idEvento
+    JOIN Atleta_has_Combate ac ON c.idCombate = ac.AC_idCombate
+    JOIN Atleta a ON ac.AC_idAtleta = a.idAtleta
+WHERE
+    e.estado = 'Ativo' 
+    AND YEAR(c.data_combate) >= YEAR(CURRENT_DATE) - 2
+GROUP BY
+    e.nomeEvento, YEAR(c.data_combate)
+ORDER BY
+    Numero_Participantes DESC
+LIMIT 5;
+
+
+
+
+
 
 
 

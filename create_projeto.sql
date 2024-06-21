@@ -1,3 +1,4 @@
+SET FOREIGN_KEY_CHECKS=0;
 CREATE SCHEMA IF NOT EXISTS `Projeto`;
 USE `Projeto`;
 
@@ -5,7 +6,7 @@ USE `Projeto`;
 -- Table `Projeto`.`Capitaes`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Capitaes` (
-  `idCapitao` INT NULL DEFAULT NULL AUTO_INCREMENT,
+  `idCapitao` INT AUTO_INCREMENT,
   `nome` VARCHAR(100) NOT NULL,
   `idade` INT NOT NULL,
   PRIMARY KEY (`idCapitao`));
@@ -15,7 +16,7 @@ CREATE TABLE IF NOT EXISTS `Capitaes` (
 -- Table `Projeto`.`Escola`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Escola` (
-  `idEscola` INT NULL DEFAULT NULL AUTO_INCREMENT,
+  `idEscola` INT AUTO_INCREMENT,
   `nome` VARCHAR(100) NOT NULL,
   `morada` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`idEscola`));
@@ -30,20 +31,18 @@ CREATE TABLE IF NOT EXISTS `Atleta` (
   `idade` INT NOT NULL,
   `peso` FLOAT NOT NULL,
   `altura` FLOAT NOT NULL,
-  `Atleta_idCapitao` INT NOT NULL,
-  `Atleta_idEscola` INT NOT NULL,
+  `Atleta_idCapitao` INT NULL,
+  `Atleta_idEscola` INT NULL,
   PRIMARY KEY (`idAtleta`, `Atleta_idCapitao`, `Atleta_idEscola`),
   CONSTRAINT `fk_Atleta_Capitaes`
     FOREIGN KEY (`Atleta_idCapitao`)
-    REFERENCES `Capitaes` (`idCapitao`)
-    ON DELETE NO ACTION
-    ON UPDATE CASCADE,
+    REFERENCES `Capitaes` (`idCapitao`),
     
   CONSTRAINT `fk_Atleta_Escola`
     FOREIGN KEY (`Atleta_idEscola`)
     REFERENCES `Escola` (`idEscola`)
-    ON DELETE NO ACTION
-    ON UPDATE CASCADE);
+);
+    
 
 
 -- -----------------------------------------------------
@@ -78,6 +77,7 @@ CREATE TABLE IF NOT EXISTS `Combate` (
   `idCombate` INT NULL DEFAULT NULL AUTO_INCREMENT,
   `nomeCombate` VARCHAR(100) NOT NULL,
   `atletas` VARCHAR(100) NOT NULL,
+  `data_combate` date NOT NULL,
   `Combate_idEvento` INT NOT NULL,
   PRIMARY KEY (`idCombate`, `Combate_idEvento`),
   
@@ -112,23 +112,23 @@ CREATE TABLE IF NOT EXISTS `Modalidade` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Estatistica` (
   `idEstatistica` INT NULL DEFAULT NULL AUTO_INCREMENT,
-  `numVitorias` INT NOT NULL,
-  `numDerrotas` INT NOT NULL,
-  `numCombates` INT NOT NULL,
-  `anosExperiencia` INT NOT NULL,
-  `Estatistica_idAtleta` INT NOT NULL,
-  `Estatistica_idCapitao` INT NOT NULL,
-  `Estatistica_idEscola` INT NOT NULL,
+  `numVitorias` INT NULL,
+  `numDerrotas` INT NULL,
+  `numCombates` INT NULL,
+  `anosExperiencia` INT NULL,
+  `Estatistica_idAtleta` INT NULL,
+  `Estatistica_idCapitao` INT NULL,
+  `Estatistica_idEscola` INT NULL,
   PRIMARY KEY (`idEstatistica`),
   CONSTRAINT `fk_Estatistica_Atleta`
     FOREIGN KEY (`Estatistica_idAtleta`)
     REFERENCES `Atleta` (`idAtleta`),
     
-  CONSTRAINT `fk_Estatistica_Atleta1`
+  CONSTRAINT `fk_Estatistica_Capitao`
     FOREIGN KEY (`Estatistica_idCapitao`)
     REFERENCES `Atleta` (`Atleta_idCapitao`),
     
-  CONSTRAINT `fk_Estatistica_Atleta2`
+  CONSTRAINT `fk_Estatistica_Escola`
     FOREIGN KEY (`Estatistica_idEscola`)
     REFERENCES `Atleta` (`Atleta_idEscola`)
 );
@@ -155,14 +155,11 @@ CREATE TABLE IF NOT EXISTS `Atleta_has_Combate` (
   
   CONSTRAINT `fk_Atleta_has_Combate_Atleta1`
     FOREIGN KEY (`AC_idAtleta`)
-    REFERENCES `Atleta` (`idAtleta`)
-    ON DELETE NO ACTION
-    ON UPDATE CASCADE,
+    REFERENCES `Atleta` (`idAtleta`),
   CONSTRAINT `fk_Atleta_has_Combate_Combate`
     FOREIGN KEY (`AC_idCombate`)
     REFERENCES `Combate` (`idCombate`)
-    ON DELETE NO ACTION
-    ON UPDATE CASCADE);
+);
 
 -- -----------------------------------------------------
 -- Table `Projeto`.`Juri_has_Evento`

@@ -1,6 +1,5 @@
 use projeto;
 
--- Inserir dados na tabela `Capitaes`
 INSERT INTO `Capitaes` (`nome`, `idade`) VALUES
 ('João Silva', 35),
 ('Carlos Santos', 30),
@@ -23,7 +22,6 @@ INSERT INTO `Capitaes` (`nome`, `idade`) VALUES
 ('Eduardo Carvalho', 32),
 ('Rodrigo Ramos', 29);
 
--- Inserir dados na tabela `Escola`
 INSERT INTO `Escola` (`nome`, `morada`) VALUES
 ('Academia de Luta Dragão', 'Rua da Rotunda Nº19'),
 ('Centro de Artes Marciais Phoenix', 'Avenida das Flores Nº22'),
@@ -46,30 +44,6 @@ INSERT INTO `Escola` (`nome`, `morada`) VALUES
 ('Escola de Hapkido Tigre Branco', 'Rua das Fontes Nº4'),
 ('Academia de Boxe Ferro', 'Rua da Estação Nº18');
 
--- Inserir dados na tabela `Atleta`
-INSERT INTO `Atleta` (`nome`, `idade`, `peso`, `altura`, `Atleta_idCapitao`, `Atleta_idEscola`) VALUES
-('João Silva', 25, 70.5, 1.75, 1, 1),
-('Carlos Santos', 30, 68.2, 1.80, 2, 2),
-('Miguel Pereira', 28, 75.3, 1.78, 3, 3),
-('Pedro Costa', 24, 72.1, 1.82, 4, 4),
-('Ricardo Martins', 26, 73.0, 1.77, 5, 5),
-('Luís Oliveira', 21, 69.4, 1.81, 6, 6),
-('André Rodrigues', 27, 74.5, 1.76, 7, 7),
-('Tiago Fernandes', 23, 71.8, 1.83, 8, 8),
-('Fernando Almeida', 29, 76.2, 1.79, 9, 9),
-('José Sousa', 20, 67.5, 1.84, 10, 10),
-('Paulo Ribeiro', 25, 70.9, 1.75, 11, 11),
-('Manuel Dias', 22, 68.3, 1.80, 12, 12),
-('Rui Lopes', 28, 75.1, 1.78, 13, 13),
-('Bruno Gomes', 30, 72.4, 1.82, 14, 14),
-('Guilherme Lima', 26, 73.5, 1.77, 15, 15),
-('Henrique Pinto', 21, 69.8, 1.81, 16, 16),
-('Fábio Monteiro', 27, 74.6, 1.76, 17, 17),
-('António Marques', 23, 71.9, 1.83, 18, 18),
-('Eduardo Carvalho', 29, 76.3, 1.79, 19, 19),
-('Rodrigo Ramos', 20, 67.7, 1.84, 20, 20);
-
--- Inserir dados na tabela `Mister`
 INSERT INTO `Mister` (`nome`, `idade`, `Mister_idEscola`) VALUES
 ('José Mourinho', 57, 1),
 ('Pep Guardiola', 49, 2),
@@ -92,7 +66,28 @@ INSERT INTO `Mister` (`nome`, `idade`, `Mister_idEscola`) VALUES
 ('Paulo Fonseca', 47, 19),
 ('David Moyes', 57, 20);
 
--- Inserir dados na tabela `Evento`
+INSERT INTO `Atleta` (`nome`, `idade`, `peso`, `altura`, `Atleta_idCapitao`, `Atleta_idEscola`) VALUES
+('João Silva', 25, 70.5, 1.75, NULL, NULL), 
+('Carlos Santos', 30, 68.2, 1.80, 1, 1), 
+('Miguel Pereira', 28, 75.3, 1.78, 2, 1), 
+('Pedro Costa', 24, 72.1, 1.82, NULL, NULL), 
+('Ricardo Martins', 26, 73.0, 1.77, 4, 3), 
+('Luís Oliveira', 21, 69.4, 1.81, NULL, NULL), 
+('André Rodrigues', 27, 74.5, 1.76, 6, 2), 
+('Tiago Fernandes', 23, 71.8, 1.83, NULL, NULL), 
+('Fernando Almeida', 29, 76.2, 1.79, 7, 4), 
+('José Sousa', 20, 67.5, 1.84, 8, 3), 
+('Paulo Ribeiro', 25, 70.9, 1.75, NULL, NULL), 
+('Manuel Dias', 22, 68.3, 1.80, 9, 2), 
+('Rui Lopes', 28, 75.1, 1.78, NULL, NULL), 
+('Bruno Gomes', 30, 72.4, 1.82, 11, 5), 
+('Guilherme Lima', 26, 73.5, 1.77, NULL, NULL), 
+('Henrique Pinto', 21, 69.8, 1.81, 12, 6), 
+('Fábio Monteiro', 27, 74.6, 1.76, NULL, NULL), 
+('António Marques', 23, 71.9, 1.83, 14, 7), 
+('Eduardo Carvalho', 29, 76.3, 1.79, NULL, NULL), 
+('Rodrigo Ramos', 20, 67.7, 1.84, 16, 8); 
+
 INSERT INTO `Evento` (`nomeEvento`, `estado`) VALUES
 ('Campeonato Nacional', 'Ativo'),
 ('Torneio de Verão', 'Ativo'),
@@ -105,7 +100,7 @@ INSERT INTO `Evento` (`nomeEvento`, `estado`) VALUES
 ('Copa de Verão', 'Inativo'),
 ('Torneio Internacional', 'Ativo'),
 ('Liga dos Campeões', 'Inativo'),
-('Taça dos Campeões', 'Ativo'),
+('Taça dos Campeões', 'Inativo'),
 ('Desafio de Inverno', 'Inativo'),
 ('Campeonato de Verão', 'Ativo'),
 ('Torneio de Artes Marciais', 'Inativo'),
@@ -115,146 +110,144 @@ INSERT INTO `Evento` (`nomeEvento`, `estado`) VALUES
 ('Taça Primavera', 'Inativo'),
 ('Copa dos Campeões', 'Ativo');
 
--- Inserir dados na tabela `Combate`
-INSERT INTO `Combate` (`nomeCombate`, `atletas`, `Combate_idEvento`) VALUES
-('Combate 1', 'João Silva vs Carlos Santos', 1),
-('Combate 2', 'Miguel Pereira vs Pedro Costa', 2),
-('Combate 3', 'Ricardo Martins vs Luís Oliveira', 3),
-('Combate 4', 'André Rodrigues vs Tiago Fernandes', 4),
-('Combate 5', 'Fernando Almeida vs José Sousa', 5),
-('Combate 6', 'Paulo Ribeiro vs Manuel Dias', 6),
-('Combate 7', 'Rui Lopes vs Bruno Gomes', 7),
-('Combate 8', 'Guilherme Lima vs Henrique Pinto', 8),
-('Combate 9', 'Fábio Monteiro vs António Marques', 9),
-('Combate 10', 'Eduardo Carvalho vs Rodrigo Ramos', 10),
-('Combate 11', 'João Silva vs Miguel Pereira', 11),
-('Combate 12', 'Carlos Santos vs Pedro Costa', 12),
-('Combate 13', 'Ricardo Martins vs Tiago Fernandes', 13),
-('Combate 14', 'André Rodrigues vs José Sousa', 14),
-('Combate 15', 'Fernando Almeida vs Manuel Dias', 15),
-('Combate 16', 'Paulo Ribeiro vs Bruno Gomes', 16),
-('Combate 17', 'Rui Lopes vs Henrique Pinto', 17),
-('Combate 18', 'Guilherme Lima vs António Marques', 18),
-('Combate 19', 'Fábio Monteiro vs Rodrigo Ramos', 19),
-('Combate 20', 'Eduardo Carvalho vs João Silva', 20);
+INSERT INTO `Combate` (`nomeCombate`, `atletas`, `data_combate`, `Combate_idEvento`) VALUES
+('Combate 1', 'Carlos Santos vs Miguel Pereira', '2023-04-15', 1),
+('Combate 2', 'Ricardo Martins vs André Rodrigues', '2022-07-28', 1),
+('Combate 3', 'Fernando Almeida vs José Sousa', '2022-11-03', 2),
+('Combate 4', 'Manuel Dias vs Bruno Gomes', '2023-09-19', 2),
+('Combate 5', 'Henrique Pinto vs António Marques', '2022-12-30', 4),
+('Combate 6', 'Rodrigo Ramos vs José Sousa', '2023-06-07', 4),
+('Combate 7', 'Carlos Santos vs Ricardo Martins', '2022-08-21', 4),
+('Combate 8', 'Fernando Almeida vs Manuel Dias', '2022-10-11', 6),
+('Combate 9', 'Henrique Pinto vs Rodrigo Ramos', '2023-01-25', 8),
+('Combate 10', 'Miguel Pereira vs André Rodrigues', '2023-05-14', 8),
+('Combate 11', 'José Sousa vs Bruno Gomes', '2022-09-07', 10),
+('Combate 12', 'António Marques vs Carlos Santos', '2023-02-18', 10),
+('Combate 13', 'Rodrigo Ramos vs Fernando Almeida', '2023-07-03', 14),
+('Combate 14', 'Henrique Pinto vs Miguel Pereira', '2022-12-10', 14),
+('Combate 15', 'José Sousa vs Manuel Dias', '2023-04-22', 16),
+('Combate 16', 'Bruno Gomes vs António Marques', '2023-08-02', 16),
+('Combate 17', 'Ricardo Martins vs Henrique Pinto', '2023-01-14', 6),
+('Combate 18', 'André Rodrigues vs Miguel Pereira', '2023-06-29', 14),
+('Combate 19', 'Carlos Santos vs José Sousa', '2022-10-05', 20),
+('Combate 20', 'António Marques vs Ricardo Martins', '2023-03-11', 1);
 
--- Inserir dados na tabela `Modalidade`
 INSERT INTO `Modalidade` (`nomeModalidade`, `Modalidade_idCombate`, `Modalidade_idEvento`) VALUES
 ('Boxe', 1, 1),
-('Jiu-Jitsu', 2, 2),
-('Muay Thai', 3, 3),
-('Karate', 4, 4),
-('Taekwondo', 5, 5),
-('Capoeira', 6, 6),
-('Judô', 7, 7),
-('Kickboxing', 8, 8),
-('MMA', 9, 9),
-('Wrestling', 10, 10),
-('Kung Fu', 11, 11),
-('Sambo', 12, 12),
-('Krav Maga', 13, 13),
+('Jiu-Jitsu', 2, 1),
+('Muay Thai', 3, 2),
+('Karate', 4, 2),
+('Taekwondo', 5, 4),
+('Capoeira', 6, 4),
+('Judô', 7, 6),
+('Kickboxing', 8, 6),
+('MMA', 9, 8),
+('Wrestling', 10, 8),
+('Kung Fu', 11, 10),
+('Sambo', 12, 10),
+('Krav Maga', 13, 14),
 ('Luta Livre', 14, 14),
-('Hapkido', 15, 15),
+('Hapkido', 15, 16),
 ('Boxe', 16, 16),
-('Jiu-Jitsu', 17, 17),
+('Jiu-Jitsu', 17, 18),
 ('Muay Thai', 18, 18),
-('Karate', 19, 19),
+('Karate', 19, 20),
 ('Taekwondo', 20, 20);
 
--- Inserir dados na tabela `Estatistica`
 INSERT INTO `Estatistica` (`numVitorias`, `numDerrotas`, `numCombates`, `anosExperiencia`, `Estatistica_idAtleta`, `Estatistica_idCapitao`, `Estatistica_idEscola`) VALUES
-(5, 2, 7, 3, 1, 1, 1),
+(NULL, NULL, NULL, 3, 1, NULL, NULL),
 (3, 3, 6, 2, 2, 2, 2),
 (6, 1, 7, 4, 3, 3, 3),
-(4, 2, 6, 3, 4, 4, 4),
+(NULL, NULL, NULL, 3, 4, NULL, NULL),
 (5, 3, 8, 5, 5, 5, 5),
-(2, 4, 6, 1, 6, 6, 6),
+(NULL, NULL, NULL, 1, 6, NULL, NULL),
 (6, 2, 8, 4, 7, 7, 7),
-(4, 3, 7, 2, 8, 8, 8),
+(NULL, NULL, NULL, 2, 8, NULL, NULL),
 (5, 2, 7, 3, 9, 9, 9),
 (3, 3, 6, 2, 10, 10, 10),
-(6, 1, 7, 4, 11, 11, 11),
+(NULL, NULL, NULL, 4, 11, NULL, NULL),
 (4, 2, 6, 3, 12, 12, 12),
-(5, 3, 8, 5, 13, 13, 13),
+(NULL, NULL, NULL, 5, 13, NULL, NULL),
 (2, 4, 6, 1, 14, 14, 14),
-(6, 2, 8, 4, 15, 15, 15),
+(NULL, NULL, NULL, 4, 15, NULL, NULL),
 (4, 3, 7, 2, 16, 16, 16),
-(5, 2, 7, 3, 17, 17, 17),
+(NULL, NULL, NULL, 3, 17, NULL, NULL),
 (3, 3, 6, 2, 18, 18, 18),
-(6, 1, 7, 4, 19, 19, 19),
+(NULL, NULL, NULL, 4, 19, NULL, NULL),
 (4, 2, 6, 3, 20, 20, 20);
 
--- Inserir dados na tabela `Juri`
 INSERT INTO `Juri` (`nomeJuri`, `idEvento`) VALUES
 ('Álvaro Mendes', 1),
 ('Beatriz Oliveira', 2),
-('Carlos Fernandes', 3),
-('Daniela Costa', 4),
-('Eduardo Almeida', 5),
-('Fernanda Ribeiro', 6),
-('Gustavo Martins', 7),
-('Helena Silva', 8),
-('Isabel Santos', 9),
-('João Pereira', 10),
-('Katia Lopes', 11),
-('Leonardo Carvalho', 12),
-('Mariana Dias', 13),
-('Nuno Rodrigues', 14),
-('Olívia Monteiro', 15),
-('Pedro Nunes', 16),
-('Quintino Sousa', 17),
-('Rafaela Cunha', 18),
-('Sérgio Castro', 19),
-('Tatiana Ramos', 20);
+('Carlos Fernandes', 4),
+('Daniela Costa', 6),
+('Eduardo Almeida', 1),
+('Fernanda Ribeiro', 2),
+('Gustavo Martins', 8),
+('Helena Silva', 10),
+('Isabel Santos',14),
+('João Pereira', 6),
+('Katia Lopes', 4),
+('Leonardo Carvalho', 2),
+('Mariana Dias', 16),
+('Nuno Rodrigues', 18),
+('Olívia Monteiro', 10),
+('Pedro Nunes', 20),
+('Quintino Sousa', 1),
+('Rafaela Cunha', 6),
+('Sérgio Castro', 4),
+('Tatiana Ramos', 16);
 
+INSERT INTO `Atleta_has_Combate` (`AC_idAtleta`, `AC_idCombate`)
+SELECT AC1.idAtleta, C.idCombate
+FROM (
+    SELECT 'Carlos Santos vs Miguel Pereira' AS combate, 1 AS idCombate
+    UNION ALL SELECT 'Ricardo Martins vs André Rodrigues', 2
+    UNION ALL SELECT 'Fernando Almeida vs José Sousa', 3
+    UNION ALL SELECT 'Manuel Dias vs Bruno Gomes', 4
+    UNION ALL SELECT 'Henrique Pinto vs António Marques', 5
+    UNION ALL SELECT 'Rodrigo Ramos vs José Sousa', 6
+    UNION ALL SELECT 'Carlos Santos vs Ricardo Martins', 7
+    UNION ALL SELECT 'Fernando Almeida vs Manuel Dias', 8
+    UNION ALL SELECT 'Henrique Pinto vs Rodrigo Ramos', 9
+    UNION ALL SELECT 'Miguel Pereira vs André Rodrigues', 10
+    UNION ALL SELECT 'José Sousa vs Bruno Gomes', 11
+    UNION ALL SELECT 'António Marques vs Carlos Santos', 12
+    UNION ALL SELECT 'Rodrigo Ramos vs Fernando Almeida', 13
+    UNION ALL SELECT 'Henrique Pinto vs Miguel Pereira', 14
+    UNION ALL SELECT 'José Sousa vs Manuel Dias', 15
+    UNION ALL SELECT 'Bruno Gomes vs António Marques', 16
+    UNION ALL SELECT 'Ricardo Martins vs Henrique Pinto', 17
+    UNION ALL SELECT 'André Rodrigues vs Miguel Pereira', 18
+    UNION ALL SELECT 'Carlos Santos vs José Sousa', 19
+    UNION ALL SELECT 'António Marques vs Ricardo Martins', 20
+) AS C
+JOIN `Atleta` AS AC1 ON AC1.nome = SUBSTRING_INDEX(C.combate, ' vs ', 1)
+JOIN `Atleta` AS AC2 ON AC2.nome = SUBSTRING_INDEX(C.combate, ' vs ', -1)
+WHERE AC1.idAtleta <> AC2.idAtleta; -- Atletas Diferentes
 
--- Inserir dados na tabela `Atleta_has_Combate`
-INSERT INTO `Atleta_has_Combate` (`AC_idAtleta`, `AC_idCombate`) VALUES
-(1, 1),
-(2, 2),
-(3, 3),
-(4, 4),
-(5, 5),
-(6, 6),
-(7, 7),
-(8, 8),
-(9, 9),
-(10, 10),
-(11, 11),
-(12, 12),
-(13, 13),
-(14, 14),
-(15, 15),
-(16, 16),
-(17, 17),
-(18, 18),
-(19, 19),
-(20, 20);
-
--- Inserir dados na tabela `Juri_has_Evento`
 INSERT INTO `Juri_has_Evento` (`JC_idJuri`, `JC_idEvento`) VALUES
 (1, 1),
 (2, 2),
-(3, 3),
-(4, 4),
-(5, 5),
-(6, 6),
-(7, 7),
-(8, 8),
-(9, 9),
-(10, 10),
-(11, 11),
-(12, 12),
-(13, 13),
-(14, 14),
-(15, 15),
-(16, 16),
-(17, 17),
-(18, 18),
-(19, 19),
-(20, 20);
+(3, 4),
+(4, 6),
+(5, 1),
+(6, 2),
+(7, 8),
+(8, 10),
+(9, 14),
+(10, 6),
+(11, 4),
+(12, 2),
+(13, 16),
+(14, 18),
+(15, 10),
+(16, 20),
+(17, 1),
+(18, 6),
+(19, 4),
+(20, 16);
 
--- Inserir dados na tabela `Modalidade_has_Escola`
 INSERT INTO `Modalidade_has_Escola` (`MA_idModalidade`, `MA_idEscola`) VALUES
 (1, 1),
 (2, 2),

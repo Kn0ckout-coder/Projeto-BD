@@ -18,3 +18,5 @@ DELIMITER ;
 -- Exemplo de chamada do Stored Procedure para inserir um atleta
 CALL InserirAtleta('João Silva', 25, 70.5, 1.75, 1, 1);
 
+
+
