@@ -2,7 +2,6 @@
 ALTER TABLE `Estatistica`
 DROP FOREIGN KEY `fk_Estatistica_Capitao`;
 
--- Alterar a estrutura da tabela Atleta
 ALTER TABLE `Atleta`
 MODIFY COLUMN `Atleta_idCapitao` INT NULL,
 MODIFY COLUMN `Atleta_idEscola` INT NULL,

@@ -66,27 +66,52 @@ INSERT INTO `Mister` (`nome`, `idade`, `Mister_idEscola`) VALUES
 ('Paulo Fonseca', 47, 19),
 ('David Moyes', 57, 20);
 
-INSERT INTO `Atleta` (`nome`, `idade`, `peso`, `altura`, `Atleta_idCapitao`, `Atleta_idEscola`) VALUES
-('João Silva', 25, 70.5, 1.75, NULL, NULL), 
-('Carlos Santos', 30, 68.2, 1.80, 1, 1), 
-('Miguel Pereira', 28, 75.3, 1.78, 2, 1), 
-('Pedro Costa', 24, 72.1, 1.82, NULL, NULL), 
-('Ricardo Martins', 26, 73.0, 1.77, 4, 3), 
-('Luís Oliveira', 21, 69.4, 1.81, NULL, NULL), 
-('André Rodrigues', 27, 74.5, 1.76, 6, 2), 
-('Tiago Fernandes', 23, 71.8, 1.83, NULL, NULL), 
-('Fernando Almeida', 29, 76.2, 1.79, 7, 4), 
-('José Sousa', 20, 67.5, 1.84, 8, 3), 
-('Paulo Ribeiro', 25, 70.9, 1.75, NULL, NULL), 
-('Manuel Dias', 22, 68.3, 1.80, 9, 2), 
-('Rui Lopes', 28, 75.1, 1.78, NULL, NULL), 
-('Bruno Gomes', 30, 72.4, 1.82, 11, 5), 
-('Guilherme Lima', 26, 73.5, 1.77, NULL, NULL), 
-('Henrique Pinto', 21, 69.8, 1.81, 12, 6), 
-('Fábio Monteiro', 27, 74.6, 1.76, NULL, NULL), 
-('António Marques', 23, 71.9, 1.83, 14, 7), 
-('Eduardo Carvalho', 29, 76.3, 1.79, NULL, NULL), 
-('Rodrigo Ramos', 20, 67.7, 1.84, 16, 8); 
+
+DELIMITER //
+
+CREATE PROCEDURE InserirAtleta(
+    IN p_nome VARCHAR(255),
+    IN p_idade INT,
+    IN p_peso DECIMAL(5,2),
+    IN p_altura DECIMAL(3,2),
+    IN p_Atleta_idCapitao INT,
+    IN p_Atleta_idEscola INT
+)
+BEGIN
+    INSERT INTO `Atleta` (`nome`, `idade`, `peso`, `altura`, `Atleta_idCapitao`, `Atleta_idEscola`)
+    VALUES (
+        p_nome, 
+        p_idade, 
+        p_peso, 
+        p_altura, 
+        IF(p_Atleta_idCapitao IS NULL, NULL, p_Atleta_idCapitao), 
+        IF(p_Atleta_idEscola IS NULL, NULL, p_Atleta_idEscola)
+    );
+END //
+
+DELIMITER ;
+
+
+CALL InserirAtleta('João Silva', 25, 70.5, 1.75, NULL, NULL);
+CALL InserirAtleta('Carlos Santos', 30, 68.2, 1.80, 1, 1);
+CALL InserirAtleta('Miguel Pereira', 28, 75.3, 1.78, 2, 1);
+CALL InserirAtleta('Pedro Costa', 24, 72.1, 1.82, NULL, NULL);
+CALL InserirAtleta('Ricardo Martins', 26, 73.0, 1.77, 4, 3);
+CALL InserirAtleta('Luís Oliveira', 21, 69.4, 1.81, NULL, NULL);
+CALL InserirAtleta('André Rodrigues', 27, 74.5, 1.76, 6, 2);
+CALL InserirAtleta('Tiago Fernandes', 23, 71.8, 1.83, NULL, NULL);
+CALL InserirAtleta('Fernando Almeida', 29, 76.2, 1.79, 7, 4);
+CALL InserirAtleta('José Sousa', 20, 67.5, 1.84, 8, 3);
+CALL InserirAtleta('Paulo Ribeiro', 25, 70.9, 1.75, NULL, NULL);
+CALL InserirAtleta('Manuel Dias', 22, 68.3, 1.80, 9, 2);
+CALL InserirAtleta('Rui Lopes', 28, 75.1, 1.78, NULL, NULL);
+CALL InserirAtleta('Bruno Gomes', 30, 72.4, 1.82, 11, 5);
+CALL InserirAtleta('Guilherme Lima', 26, 73.5, 1.77, NULL, NULL);
+CALL InserirAtleta('Henrique Pinto', 21, 69.8, 1.81, 12, 6);
+CALL InserirAtleta('Fábio Monteiro', 27, 74.6, 1.76, NULL, NULL);
+CALL InserirAtleta('António Marques', 23, 71.9, 1.83, 14, 7);
+CALL InserirAtleta('Eduardo Carvalho', 29, 76.3, 1.79, NULL, NULL);
+CALL InserirAtleta('Rodrigo Ramos', 20, 67.7, 1.84, 16, 8);
 
 INSERT INTO `Evento` (`nomeEvento`, `estado`) VALUES
 ('Campeonato Nacional', 'Ativo'),
