@@ -7,18 +7,17 @@ SELECT GetNumVitorias(2) AS NumeroDeVitorias;
 SELECT GetMoradaEscola(1) AS MoradaDaEscola;
 SELECT CalculateIMC(1) AS CalculoDoIMC;
 
+-- Stats Functions
+SELECT get_points_by_player_combined(2, '2023-01-01', '2023-12-31') AS PontosCombinados;
+SELECT get_ranking_by_year(1, 2023) AS RankingPorVitórias;
+SELECT get_games_by_player(2) AS CombatesPorAtleta;
+
+
 -- Stored Procedures
 CALL InserirNovoEvento('Campeonato Mundial', 'Ativo');
 SELECT * FROM Evento ORDER BY idEvento DESC LIMIT 1;
 CALL ListarAtletasPorEscola(1);
-CALL ListarAtletasPorEscola(2);
-CALL ListarAtletasPorEscola(3);
-CALL ListarAtletasPorEscola(4);
-CALL ListarAtletasPorEscola(5);
-CALL ListarAtletasPorEscola(6);
-CALL ListarAtletasPorEscola(7);
-CALL ListarAtletasPorEscola(8);
--- Existem 9 atletas sem escola e há escolas que têm 2 atletas
+-- só dá até às 8 porque ha atletas sem escolas
 
 -- Views
 SELECT * FROM Atletas;
